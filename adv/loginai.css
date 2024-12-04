@@ -1,0 +1,123 @@
+/* General Reset */
+body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Body Styles */
+body {
+    background: linear-gradient(to right, rgba(129, 5, 5, 0.945), rgb(3, 54, 150));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Container Styling */
+.container {
+    background: linear-gradient(to right, rgba(172, 134, 134, 0.521), rgba(128, 138, 156, 0.575));
+    width: 90%;
+    max-width: 400px;
+    padding: 20px 30px;
+    border: 1px solid white;
+    border-radius: 10px;
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+/* Logo Image */
+.img img {
+    width: 300px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+/* Form Label Styles */
+form label {
+    display: block;
+    text-align: left;
+    font-size: 16px;
+    margin: 10px 0 5px;
+}
+
+/* Form Input Styles */
+form input[type="text"], 
+form input[type="password"] {
+    width: 90%;
+    height: 20px;
+    margin-bottom: 15px;
+    padding: 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    outline: none;
+}
+
+/* Button Styles */
+#btn {
+    width: 30%;
+    height: 40px;
+    margin-top: 10px;
+    font-size: 16px;
+    background: white;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 300ms ease-in-out;
+}
+
+#btn:hover {
+    background: black;
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        padding: 15px 20px;
+    }
+
+    form label {
+        font-size: 14px;
+    }
+
+    form input[type="text"], 
+    form input[type="password"] {
+        height: 35px;
+        font-size: 13px;
+    }
+
+    #btn {
+        height: 35px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 10px 15px;
+    }
+
+    form label {
+        font-size: 12px;
+    }
+
+    form input[type="text"], 
+    form input[type="password"] {
+        height: 30px;
+        font-size: 12px;
+    }
+
+    #btn {
+        height: 30px;
+        font-size: 13px;
+    }
+}

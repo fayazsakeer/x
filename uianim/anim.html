@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap">
+    <style>
+        body {
+            background: linear-gradient(to right, #170f85, #911814);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .container {
+            background: linear-gradient(to top, #ffffff, #f3f4f5);
+            border-radius: 25px;
+            padding: 30px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .img img {
+            width: 200px;
+            margin-bottom: 20px;
+            /* animation: bounce 2s infinite; */
+        }
+
+        form input[type="text"], 
+        form input[type="password"] {
+            width: 80%;
+            height: 45px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 25px;
+            padding: 0 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.596);
+            font-size: 14px;
+            outline: none;
+            transition: transform 0.3s ease;
+        }
+
+        form input[type="text"]:focus, 
+        form input[type="password"]:focus {
+            transform: scale(1.05);
+        }
+
+        #btn {
+            width: 40%;
+            height: 45px;
+            border: none;
+            border-radius: 25px;
+            background: linear-gradient(to right, #170f85, #911814);
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #btn:hover {
+            transform: scale(1.1);
+            opacity: 0.9;
+        }
+
+        #languageSelector {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 10px;
+            padding: 5px 10px;
+            font-size: 14px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            form input[type="text"], 
+            form input[type="password"], 
+            #btn {
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Selector -->
+    <select id="languageSelector">
+        <option value="en">English</option>
+        <option value="es">Español</option>
+        <option value="fr">Français</option>
+        <option value="de">Deutsch</option>
+    </select>
+
+    <div class="container">
+        <div class="img">
+            <img src="xtend_logo.png" alt="Logo">
+        </div>
+        <form id="loginForm">
+            <input type="text" name="name" id="name" required placeholder="Enter Username">
+            <input type="password" name="password" id="password" required placeholder="Enter Password">
+            <input id="btn" type="submit" value="Login">
+        </form>
+    </div>
+    <script>
+        const translations = {
+            en: {
+                username: "Enter Username",
+                password: "Enter Password",
+                login: "Login",
+            },
+            es: {
+                username: "Introduzca el nombre de usuario",
+                password: "Introduzca la contraseña",
+                login: "Iniciar sesión",
+            },
+            fr: {
+                username: "Entrez le nom d'utilisateur",
+                password: "Entrez le mot de passe",
+                login: "Connexion",
+            },
+            de: {
+                username: "Benutzernamen eingeben",
+                password: "Passwort eingeben",
+                login: "Anmelden",
+            }
+        };
+
+        const languageSelector = document.getElementById('languageSelector');
+        const usernameInput = document.getElementById('name');
+        const passwordInput = document.getElementById('password');
+        const loginButton = document.getElementById('btn');
+
+        languageSelector.addEventListener('change', (e) => {
+            const selectedLang = e.target.value;
+            usernameInput.placeholder = translations[selectedLang].username;
+            passwordInput.placeholder = translations[selectedLang].password;
+            loginButton.value = translations[selectedLang].login;
+        });
+
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = usernameInput.value;
+            const password = passwordInput.value;
+            console.log(`Name: ${name}`);
+            console.log(`Password: ${password}`);
+        });
+    </script>
+</body>
+</html>

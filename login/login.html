@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="img">
+        <img src="xtend_logo.png" alt="">
+    </div>
+    <div class="container">
+        <form id="loginForm">
+          <label id="lbl1" for="name">Username</label>
+          <input type="text" name="name" id="name" required placeholder="Enter Username"><br><br>
+          <label id="lbl2" for="password">Password</label>
+          <input type="password" name="password" id="password" required placeholder="Enter Password"><br><br>
+          <input id="btn" type="submit" value="Login">
+        </form>
+    </div>
+    <script>
+        async function submitHandler(e) {
+            e.preventDefault(); 
+            const name = document.getElementById('name').value;
+            const password = document.getElementById('password').value;
+            console.log("Name:", name);
+            console.log("Password:", password);
+        }
+
+       
+        const form = document.getElementById('loginForm');
+        form.addEventListener('submit', submitHandler);
+    </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <!-- <link rel="stylesheet" href="split.css"> -->
+    <!-- <link rel="stylesheet" href="loginai.css"> -->
+    <!-- <link rel="stylesheet" href="shadow.css"> -->
+    <!-- <link rel="stylesheet" href="icon.css"> -->
+    <!-- <link rel="stylesheet" href="gradient.css"> -->
+    <link rel="stylesheet" href="curve.css">
+    <!-- <link rel="stylesheet" href="glass.css"> -->
+    <!-- <link rel="stylesheet" href="neon.css"> -->
+</head>
+<body>
+    <div class="container">
+        <div class="img">
+            <img src="xtend_logo.png" alt="Logo">
+        </div>
+        <form id="loginForm">
+          <!-- <label id="lbl1" for="name">Username</label> -->
+          <input type="text" name="name" id="name" required placeholder="Enter Username">
+          
+          <!-- <label id="lbl2" for="password">Password</label> -->
+          <input type="password" name="password" id="password" required placeholder="Enter Password">
+          
+          <input id="btn" type="submit" value="Login">
+        </form>
+    </div>
+    <script>
+        async function submitHandler(e) {
+            e.preventDefault(); 
+            const name = document.getElementById('name').value;
+            const password = document.getElementById('password').value;
+            console.log("Name:", name);
+            console.log("Password:", password);
+        }
+
+        const form = document.getElementById('loginForm');
+        form.addEventListener('submit', submitHandler);
+    </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xtend Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <h1 class="logo">Xtend</h1>
+            <div class="profile">
+                <img src="https://via.placeholder.com/40" alt="User Profile">
+            </div>
+        </div>
+
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+            <a href="#" class="nav-item"><i class="fas fa-home"></i> Home</a>
+            <a href="#" class="nav-item"><i class="fas fa-chart-bar"></i> Reports</a>
+            <a href="#" class="nav-item"><i class="fas fa-coffee"></i> Break</a>
+            <a href="#" class="nav-item"><i class="fas fa-power-off"></i> DND [OFF]</a>
+        </nav>
+
+        <!-- Stat Boxes -->
+        <div class="stat-boxes">
+            <div  id="b1" class="stat-box">Total Calls</div>
+            <div  id="b2"class="stat-box">Abandoned</div>
+            <div  id="b3"class="stat-box">A.H.T</div>
+            <div  id="b4"class="stat-box">Break Duration</div>
+            <div  id="b5"class="stat-box">Staff Duration</div>
+        </div>
+
+        <!-- Grids Section -->
+        <div class="grid-section">
+            <!-- Left Grid -->
+            <div class="grid-1">
+                <h3>Session Active</h3>
+                <div class="ip">
+                    IP Address <b>10.2030.133</b>
+                </div>
+                <div class="content">
+                    <p>User Name  <b>Arjun</b></p><br>
+                    <p>Process(s)  <b>Demo</b></p><br>
+                    <p>Login Time <b>30/Oct/2024 10:05:34</b></p><br>
+                    <p>Session Duration <b>00:33:29</b></p>
+                </div>
+                <div class="btns">
+                    <button id="brk">Break</button>
+                    <button id="show">Show</button>
+                </div>
+            </div>
+
+            <!-- Right Grid -->
+            <div class="grid-2">
+              <div class="calls">
+                <div class="div"><i class="fa-solid fa-phone"></i><h4>Call Witing (0)</h4><i id="i1" class="bi bi-plus"></i></div>
+                <div class="div"><i class="bi bi-telephone-x-fill"></i><h4>Calls Dropped (0)</h4><i id="i2" class="bi bi-plus"></i></div>
+                <div class="div"><i class="bi bi-telephone-inbound-fill"></i><h4>Call History (0)</h4><i id="i3" class="bi bi-plus"></i></div>
+                <div class="div"><i class="bi bi-journal-album"></i><span><h4>Phone Book</h4></span><i  id="i4"class="bi bi-plus"></i></div>
+              </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
