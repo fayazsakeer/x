@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Call Center Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.5s ease;
+    }
+
+    /* Light and Dark Themes */
+    body.light-mode {
+      background-color: #f8f9fa;
+      color: #333;
+    }
+    body.dark-mode {
+      background-color: #343a40;
+      color: #f8f9fa;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 250px;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: #007bff;
+      color: #fff;
+      padding-top: 50px;
+      transition: transform 0.3s ease;
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 15px;
+      text-decoration: none;
+      color: #fff;
+      font-size: 18px;
+      border-bottom: 1px solid #fff;
+      transition: background-color 0.3s;
+    }
+
+    .sidebar a:hover {
+      background-color: #0056b3;
+    }
+
+    .content {
+      margin-left: 250px;
+      padding: 20px;
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 5px;
+    }
+
+    .status-online {
+      background-color: #28a745;
+      box-shadow: 0 0 8px #28a745;
+    }
+
+    .status-offline {
+      background-color: #dc3545;
+      box-shadow: 0 0 8px #dc3545;
+    }
+
+    .date-time {
+      margin-bottom: 20px;
+    }
+
+    .theme-toggle {
+      cursor: pointer;
+      color: #007bff;
+      text-decoration: underline;
+    }
+
+    /* Call Details Table */
+    .call-table th, .call-table td {
+      text-align: center;
+    }
+
+    .call-table th {
+      background-color: #007bff;
+      color: #fff;
+    }
+
+    /* Report Section */
+    .report-section textarea {
+      width: 100%;
+      height: 100px;
+      margin-bottom: 15px;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .report-section button {
+      width: 100%;
+    }
+  </style>
+</head>
+<body class="light-mode">
+  <div class="sidebar">
+    <h3 class="text-center text-white">Call Center</h3>
+    <a href="#" id="home-btn">Home</a>
+    <a href="#" id="calls-btn">Calls</a>
+    <a href="#" id="reports-btn">Reports</a>
+    <div class="text-center mt-3">
+      <span class="theme-toggle" onclick="toggleTheme()">Switch to Dark Mode</span>
+    </div>
+  </div>
+
+  <div class="content">
+    <!-- Real-time Date and Time -->
+    <div class="date-time">
+      <div id="current-date"></div>
+      <div id="current-time"></div>
+    </div>
+
+    <!-- Dynamic Content: Home Page -->
+    <div id="home-page">
+      <h2>Welcome to Call Center Dashboard</h2>
+      <p>Status: <span id="agent-status" class="status-dot status-offline"></span> <span id="status-text">Inactive</span></p>
+      <button class="btn btn-success" onclick="toggleStatus()">Activate Agent</button>
+    </div>
+
+    <!-- Dynamic Content: Calls Page -->
+    <div id="calls-page" style="display:none;">
+      <h2>Call Details</h2>
+      <table class="table call-table">
+        <thead>
+          <tr>
+            <th>Call Type</th>
+            <th>Duration</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="call-details">
+          <tr>
+            <td>Incoming</td>
+            <td>2:30</td>
+            <td><span class="status-dot status-online"></span> Active</td>
+          </tr>
+          <tr>
+            <td>Outgoing</td>
+            <td>1:15</td>
+            <td><span class="status-dot status-offline"></span> Inactive</td>
+          </tr>
+        </tbody>
+      </table>
+      <h4>Phonebook</h4>
+      <input type="text" id="search-phonebook" class="form-control" placeholder="Search Phonebook...">
+      <ul id="phonebook-list">
+        <li>John Doe - 1234567890</li>
+        <li>Jane Smith - 0987654321</li>
+      </ul>
+    </div>
+
+    <!-- Dynamic Content: Reports Page -->
+    <div id="reports-page" style="display:none;">
+      <h2>Reports</h2>
+      <div class="report-section">
+        <h4>Write a Report</h4>
+        <textarea id="report-text"></textarea>
+        <button class="btn btn-primary" onclick="saveReport()">Save Report</button>
+        <button class="btn btn-danger" onclick="deleteReport()">Delete Report</button>
+      </div>
+      <h4>Saved Reports</h4>
+      <ul id="report-list">
+        <li>Report 1 - 01/01/2024</li>
+        <li>Report 2 - 02/01/2024</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // Real-time Date and Time
+    function updateDateTime() {
+      const now = new Date();
+      document.getElementById('current-date').textContent = `Date: ${now.toLocaleDateString()}`;
+      document.getElementById('current-time').textContent = `Time: ${now.toLocaleTimeString()}`;
+    }
+    setInterval(updateDateTime, 1000);
+
+    // Toggle Agent Status (Active/Inactive)
+    function toggleStatus() {
+      const statusDot = document.getElementById('agent-status');
+      const statusText = document.getElementById('status-text');
+      if (statusText.textContent === "Inactive") {
+        statusText.textContent = "Active";
+        statusDot.classList.remove('status-offline');
+        statusDot.classList.add('status-online');
+      } else {
+        statusText.textContent = "Inactive";
+        statusDot.classList.remove('status-online');
+        statusDot.classList.add('status-offline');
+      }
+    }
+
+    // Toggle Dark and Light Theme
+    function toggleTheme() {
+      const body = document.body;
+      const themeText = document.querySelector('.theme-toggle');
+      if (body.classList.contains('light-mode')) {
+        body.classList.remove('light-mode');
+        body.classList.add('dark-mode');
+        themeText.textContent = 'Switch to Light Mode';
+      } else {
+        body.classList.remove('dark-mode');
+        body.classList.add('light-mode');
+        themeText.textContent = 'Switch to Dark Mode';
+      }
+    }
+
+    // Handle Page Navigation
+    document.getElementById('home-btn').addEventListener('click', function() {
+      document.getElementById('home-page').style.display = 'block';
+      document.getElementById('calls-page').style.display = 'none';
+      document.getElementById('reports-page').style.display = 'none';
+    });
+    document.getElementById('calls-btn').addEventListener('click', function() {
+      document.getElementById('home-page').style.display = 'none';
+      document.getElementById('calls-page').style.display = 'block';
+      document.getElementById('reports-page').style.display = 'none';
+    });
+    document.getElementById('reports-btn').addEventListener('click', function() {
+      document.getElementById('home-page').style.display = 'none';
+      document.getElementById('calls-page').style.display = 'none';
+      document.getElementById('reports-page').style.display = 'block';
+    });
+
+    // Save Report
+    function saveReport() {
+      const reportText = document.getElementById('report-text').value;
+      const reportList = document.getElementById('report-list');
+      const newReport = document.createElement('li');
+      newReport.textContent = `New Report - ${new Date().toLocaleDateString()}: ${reportText}`;
+      reportList.appendChild(newReport);
+    }
+
+    // Delete Report
+    function deleteReport() {
+      const reportList = document.getElementById('report-list');
+      if (reportList.children.length > 0) {
+        reportList.removeChild(reportList.lastChild);
+      }
+    }
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
